@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Агентство недвижимости Вертикаль — Юлия Усова</title>
+  <meta name="description" content="Купите квартиру в новостройке без комиссии агенту. Калининград, Светлогорск, Ярославль, Рыбинск. Лучший ЖК России по версии ТОП ЖК 2026." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --dark: #1a1a2e; --dark2: #16213e; --accent: #c9a84c; --accent2: #e8c97a;
+      --light: #f8f5ef; --white: #ffffff; --gray: #6b7280; --gray-light: #f3f0e8;
+      --text: #2d2d2d; --radius: 12px; --radius-lg: 20px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Manrope', sans-serif; background: var(--light); color: var(--text); font-size: 16px; line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(26,26,46,0.96); backdrop-filter: blur(10px); padding: 14px 0; }
+    nav .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--accent); }
+    .nav-logo span { color: rgba(255,255,255,0.6); font-size: 13px; font-family: 'Manrope', sans-serif; font-weight: 400; display: block; }
+    .nav-right { display: flex; align-items: center; gap: 14px; }
+    .nav-phone { color: rgba(255,255,255,0.8); font-size: 15px; font-weight: 500; transition: color 0.2s; }
+    .nav-phone:hover { color: var(--accent); }
+    .nav-btn { background: var(--accent); color: var(--dark); padding: 10px 24px; border-radius: 50px; font-weight: 600; font-size: 14px; transition: background 0.2s; white-space: nowrap; }
+    .nav-btn:hover { background: var(--accent2); }
+
+    .hero { background: var(--dark); min-height: 100vh; display: flex; align-items: center; padding: 120px 0 80px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: url('images/hero-bg.jpg') center/cover no-repeat; opacity: 0.25; }
+    .hero-content { position: relative; z-index: 1; max-width: 680px; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.4); color: var(--accent2); padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 500; margin-bottom: 28px; }
+    .hero-badge::before { content: '★'; font-size: 12px; }
+    .hero h1 { font-size: clamp(36px,5vw,60px); color: var(--white); line-height: 1.15; margin-bottom: 24px; }
+    .hero h1 span { color: var(--accent); }
+    .hero-sub { font-size: 18px; color: rgba(255,255,255,0.75); margin-bottom: 40px; max-width: 560px; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .btn-primary { background: var(--accent); color: var(--dark); padding: 16px 36px; border-radius: 50px; font-weight: 600; font-size: 16px; display: inline-flex; align-items: center; gap: 10px; transition: background 0.2s, transform 0.15s; }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-2px); }
+    .btn-secondary { background: transparent; color: var(--white); padding: 16px 36px; border-radius: 50px; font-weight: 500; font-size: 16px; border: 1px solid rgba(255,255,255,0.3); display: inline-flex; align-items: center; gap: 10px; transition: border-color 0.2s, background 0.2s; }
+    .btn-secondary:hover { border-color: var(--white); background: rgba(255,255,255,0.05); }
+    .hero-stats { display: flex; gap: 40px; margin-top: 60px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); flex-wrap: wrap; }
+    .hero-stat strong { display: block; font-size: 28px; color: var(--accent); font-family: 'Playfair Display', serif; }
+    .hero-stat span { font-size: 13px; color: rgba(255,255,255,0.55); }
+
+    .section { padding: 90px 0; }
+    .section-tag { font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+    .section-title { font-size: clamp(28px,3.5vw,44px); line-height: 1.2; margin-bottom: 16px; color: var(--dark); }
+    .section-sub { font-size: 17px; color: var(--gray); max-width: 580px; margin-bottom: 52px; }
+    .section-light { background: var(--white); }
+    .section-dark { background: var(--dark); color: var(--white); }
+    .section-dark .section-title { color: var(--white); }
+    .section-dark .section-sub { color: rgba(255,255,255,0.6); }
+
+    .slider-wrap { position: relative; border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 4/3; background: var(--dark2); }
+    .slider-track { display: flex; transition: transform 0.45s cubic-bezier(0.4,0,0.2,1); height: 100%; }
+    .slide { min-width: 100%; height: 100%; flex-shrink: 0; }
+    .slide img { width: 100%; height: 100%; object-fit: cover; }
+    .slide-placeholder { width: 100%; height: 100%; background: var(--gray-light); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--gray); text-align: center; padding: 20px; }
+    .slider-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(26,26,46,0.75); border: 1px solid rgba(201,168,76,0.4); color: var(--accent); width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 20px; transition: background 0.2s; z-index: 2; line-height: 1; }
+    .slider-btn:hover { background: rgba(201,168,76,0.25); }
+    .slider-prev { left: 16px; }
+    .slider-next { right: 16px; }
+    .slider-dots { display: flex; justify-content: center; gap: 8px; margin-top: 14px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(26,26,46,0.2); cursor: pointer; transition: background 0.2s; border: none; padding: 0; }
+    .dot.active { background: var(--accent); }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .award-block { display: flex; align-items: flex-start; gap: 16px; background: linear-gradient(135deg,#1a1a2e,#16213e); border: 1px solid rgba(201,168,76,0.3); border-radius: var(--radius); padding: 20px 24px; margin-bottom: 24px; }
+    .award-icon { font-size: 32px; flex-shrink: 0; }
+    .award-block strong { color: var(--accent); font-size: 15px; display: block; margin-bottom: 4px; }
+    .award-block p { font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.5; }
+    .features-list { list-style: none; }
+    .features-list li { padding: 12px 0; border-bottom: 1px solid var(--gray-light); display: flex; align-items: center; gap: 12px; font-size: 15px; }
+    .features-list li::before { content: ''; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; flex-shrink: 0; }
+    .formats-block { background: rgba(201,168,76,0.07); border: 1px solid rgba(201,168,76,0.2); border-radius: var(--radius); padding: 24px 28px; margin-top: 28px; }
+    .formats-block h4 { font-size: 17px; color: var(--dark); margin-bottom: 10px; font-family: 'Playfair Display', serif; }
+    .formats-block p { font-size: 14px; color: var(--gray); line-height: 1.65; margin-bottom: 14px; }
+    .formats-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .format-tag { background: var(--dark); color: var(--accent); padding: 6px 16px; border-radius: 50px; font-size: 13px; font-weight: 500; }
+
+    .cities-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; }
+    .city-card { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: var(--radius-lg); padding: 28px 24px; transition: border-color 0.2s, transform 0.2s; }
+    .city-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .city-card.main { border-color: rgba(201,168,76,0.4); background: rgba(201,168,76,0.05); }
+    .city-status { display: inline-block; font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; padding: 5px 14px; border-radius: 50px; margin-bottom: 16px; }
+    .status-active { background: rgba(201,168,76,0.2); color: var(--accent2); }
+    .status-building { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
+    .status-soon { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.45); }
+    .status-club { background: rgba(93,202,165,0.15); color: #5dcaa5; }
+    .city-card h3 { font-size: 22px; color: var(--white); margin-bottom: 8px; }
+    .city-card p { font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.55; }
+
+    .layouts-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(260px,1fr)); gap: 24px; }
+    .layout-card { background: var(--white); border: 1px solid #e8e4da; border-radius: var(--radius-lg); overflow: hidden; transition: box-shadow 0.2s, transform 0.2s; }
+    .layout-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.1); transform: translateY(-4px); }
+    .layout-img { background: var(--gray-light); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--gray); overflow: hidden; text-align: center; padding: 12px; }
+    .layout-img img { width: 100%; height: 100%; object-fit: contain; padding: 16px; }
+    .layout-info { padding: 20px; }
+    .layout-type { font-size: 18px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
+    .layout-area { font-size: 14px; color: var(--gray); margin-bottom: 16px; }
+    .layout-btn { display: block; width: 100%; background: var(--dark); color: var(--white); text-align: center; padding: 12px; border-radius: 50px; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+    .layout-btn:hover { background: var(--accent); color: var(--dark); }
+
+    .video-wrap { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 16/9; background: var(--dark2); }
+    .video-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+
+    .mortgage-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+    .mortgage-badge { background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.3); border-radius: var(--radius); padding: 28px 32px; margin-bottom: 32px; }
+    .mortgage-badge strong { font-size: 15px; color: var(--accent); display: block; margin-bottom: 8px; }
+    .mortgage-badge p { font-size: 14px; color: rgba(255,255,255,0.65); }
+    .conditions-list { list-style: none; }
+    .conditions-list li { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.08); font-size: 15px; color: rgba(255,255,255,0.85); }
+    .cond-label { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: rgba(255,255,255,0.35); min-width: 140px; padding-top: 2px; flex-shrink: 0; }
+    .banks-title { font-size: 14px; color: rgba(255,255,255,0.5); margin-bottom: 16px; margin-top: 32px; }
+    .banks-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .bank-tag { background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.75); padding: 10px 18px; border-radius: 50px; font-size: 13px; transition: all 0.2s; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; }
+    .bank-tag:hover { border-color: var(--accent); background: rgba(201,168,76,0.12); color: var(--accent2); }
+
+    .why-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; }
+    .why-card { background: var(--gray-light); border-radius: var(--radius-lg); padding: 36px 28px; }
+    .why-num { font-family: 'Playfair Display', serif; font-size: 48px; color: var(--accent); line-height: 1; margin-bottom: 20px; opacity: 0.6; }
+    .why-card h3 { font-size: 20px; color: var(--dark); margin-bottom: 12px; }
+    .why-card p { font-size: 15px; color: var(--gray); line-height: 1.65; }
+
+    .about-me-grid { display: grid; grid-template-columns: 320px 1fr; gap: 60px; align-items: start; }
+    .about-me-photo { border-radius: var(--radius-lg); overflow: hidden; aspect-ratio: 3/4; background: var(--gray-light); }
+    .about-me-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .about-me-photo-placeholder { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--gray); padding: 24px; text-align: center; }
+    .about-me-name { font-size: 38px; color: var(--dark); margin-bottom: 4px; }
+    .about-me-title { font-size: 15px; color: var(--accent); font-weight: 600; margin-bottom: 4px; }
+    .about-me-subtitle { font-size: 14px; color: var(--gray); margin-bottom: 24px; }
+    .about-me-text { font-size: 16px; color: var(--gray); line-height: 1.75; margin-bottom: 20px; }
+    .about-me-stats { display: flex; gap: 36px; margin-bottom: 36px; flex-wrap: wrap; }
+    .about-stat strong { display: block; font-size: 32px; font-family: 'Playfair Display', serif; color: var(--dark); }
+    .about-stat span { font-size: 13px; color: var(--gray); }
+    .profiles-title { font-size: 13px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--gray); margin-bottom: 14px; }
+    .profiles-list { display: flex; gap: 12px; flex-wrap: wrap; }
+    .profile-link { background: var(--dark); color: var(--white); padding: 10px 22px; border-radius: 50px; font-size: 14px; font-weight: 500; transition: background 0.2s; }
+    .profile-link:hover { background: var(--accent); color: var(--dark); }
+
+    .reviews-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(300px,1fr)); gap: 24px; }
+    .review-card { background: var(--white); border: 1px solid #e8e4da; border-radius: var(--radius-lg); padding: 28px; }
+    .review-stars { color: var(--accent); font-size: 16px; margin-bottom: 14px; letter-spacing: 2px; }
+    .review-text { font-size: 15px; color: var(--text); line-height: 1.65; margin-bottom: 20px; }
+    .review-author { display: flex; align-items: center; gap: 12px; }
+    .review-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--dark); color: var(--accent); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 14px; flex-shrink: 0; }
+    .review-name { font-weight: 500; font-size: 14px; color: var(--dark); }
+    .review-city { font-size: 13px; color: var(--gray); }
+
+    .cta-block { background: var(--dark); border-radius: var(--radius-lg); padding: 64px; text-align: center; }
+    .cta-block h2 { color: var(--white); font-size: clamp(28px,3vw,42px); margin-bottom: 16px; }
+    .cta-block p { color: rgba(255,255,255,0.6); font-size: 17px; max-width: 520px; margin: 0 auto 40px; }
+    .cta-actions { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+    .cta-phone { display: block; margin-top: 24px; color: var(--accent2); font-size: 24px; font-family: 'Playfair Display', serif; letter-spacing: 0.5px; transition: color 0.2s; }
+    .cta-phone:hover { color: var(--white); }
+
+    footer { background: #0f0f1a; padding: 56px 0 32px; color: rgba(255,255,255,0.45); font-size: 14px; }
+    .footer-inner { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--accent); margin-bottom: 10px; }
+    .footer-col-title { font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.2); margin-bottom: 14px; }
+    .footer-links { display: flex; flex-direction: column; gap: 10px; }
+    .footer-links a { color: rgba(255,255,255,0.5); transition: color 0.2s; }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-phone-big { font-size: 20px; color: rgba(255,255,255,0.85); font-weight: 500; transition: color 0.2s; }
+    .footer-phone-big:hover { color: var(--accent); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.07); margin-top: 40px; padding-top: 24px; color: rgba(255,255,255,0.2); font-size: 13px; }
+
+    .cookie-banner { position: fixed; bottom: 0; left: 0; right: 0; z-index: 999; background: rgba(15,15,26,0.97); border-top: 1px solid rgba(201,168,76,0.25); padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; backdrop-filter: blur(8px); }
+    .cookie-text { font-size: 14px; color: rgba(255,255,255,0.7); max-width: 700px; line-height: 1.6; }
+    .cookie-text a { color: var(--accent); text-decoration: underline; }
+    .cookie-actions { display: flex; gap: 10px; flex-shrink: 0; }
+    .cookie-accept { background: var(--accent); color: var(--dark); padding: 10px 28px; border-radius: 50px; font-size: 14px; font-weight: 600; cursor: pointer; border: none; transition: background 0.2s; white-space: nowrap; }
+    .cookie-accept:hover { background: var(--accent2); }
+    .cookie-decline { background: transparent; color: rgba(255,255,255,0.45); padding: 10px 20px; border-radius: 50px; font-size: 14px; cursor: pointer; border: 1px solid rgba(255,255,255,0.15); transition: all 0.2s; white-space: nowrap; }
+    .cookie-decline:hover { color: rgba(255,255,255,0.7); border-color: rgba(255,255,255,0.3); }
+    @media (max-width: 1000px) { .cities-grid { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 900px) {
+      .about-grid, .mortgage-grid, .about-me-grid { grid-template-columns: 1fr; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .cities-grid, .why-grid { grid-template-columns: 1fr; }
+      .cta-block { padding: 40px 20px; }
+      .footer-inner { grid-template-columns: 1fr; }
+      .nav-phone { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="nav-logo">Вертикаль<span>Агентство недвижимости</span></div>
+    <div class="nav-right">
+      <a href="tel:+79154977771" class="nav-phone">+7 915 497-77-71</a>
+      <a href="https://t.me/usova.uv" target="_blank" class="nav-btn">Написать в Telegram</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge">Лучший ЖК России — ТОП ЖК 2026</div>
+      <h1>Купите квартиру в новостройке <span>без комиссии</span> агенту</h1>
+      <p class="hero-sub">Помогаю иногородним покупателям выбрать и оформить квартиру. Вы платите только застройщику — моя комиссия уже включена в его бюджет.</p>
+      <div class="hero-actions">
+        <a href="https://t.me/usova.uv" target="_blank" class="btn-primary">Написать в Telegram</a>
+        <a href="https://vk.com/agentusova" target="_blank" class="btn-secondary">ВКонтакте</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><strong>с 2006</strong><span>в недвижимости</span></div>
+        <div class="hero-stat"><strong>9</strong><span>банков-партнёров</span></div>
+        <div class="hero-stat"><strong>4 города</strong><span>работаю дистанционно</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="slider-wrap">
+          <div class="slider-track" id="sliderTrack">
+            <div class="slide"><img src="images/complex-1.jpg" alt="Комплекс" onerror="this.parentNode.innerHTML='&lt;div class=slide-placeholder&gt;Фото 1 — images/complex-1.jpg&lt;/div&gt;'" /></div>
+            <div class="slide"><img src="images/complex-2.jpg" alt="Комплекс" onerror="this.parentNode.innerHTML='&lt;div class=slide-placeholder&gt;Фото 2 — images/complex-2.jpg&lt;/div&gt;'" /></div>
+            <div class="slide"><img src="images/complex-3.jpg" alt="Комплекс" onerror="this.parentNode.innerHTML='&lt;div class=slide-placeholder&gt;Фото 3 — images/complex-3.jpg&lt;/div&gt;'" /></div>
+            <div class="slide"><img src="images/complex-4.jpg" alt="Комплекс" onerror="this.parentNode.innerHTML='&lt;div class=slide-placeholder&gt;Фото 4 — images/complex-4.jpg&lt;/div&gt;'" /></div>
+            <div class="slide"><img src="images/complex-5.jpg" alt="Комплекс" onerror="this.parentNode.innerHTML='&lt;div class=slide-placeholder&gt;Фото 5 — images/complex-5.jpg&lt;/div&gt;'" /></div>
+            <div class="slide"><img src="images/complex-6.jpg" alt="Комплекс" onerror="this.parentNode.innerHTML='&lt;div class=slide-placeholder&gt;Фото 6 — images/complex-6.jpg&lt;/div&gt;'" /></div>
+          </div>
+          <button class="slider-btn slider-prev" onclick="slideMove(-1)">&#8249;</button>
+          <button class="slider-btn slider-next" onclick="slideMove(1)">&#8250;</button>
+        </div>
+        <div class="slider-dots" id="sliderDots"></div>
+      </div>
+      <div>
+        <p class="section-tag">О комплексе</p>
+        <h2 class="section-title">Пространство, где семье действительно комфортно</h2>
+        <div class="award-block">
+          <div class="award-icon">🏆</div>
+          <div>
+            <strong>Лучший ЖК России — ТОП ЖК 2026</strong>
+            <p>Из 1556 проектов от 700 застройщиков по всей России — первое место. Архитектура, технологии, благоустройство, экологичность и инфраструктура.</p>
+          </div>
+        </div>
+        <ul class="features-list">
+          <li>Школа и детский сад в шаговой доступности</li>
+          <li>Закрытый двор без машин</li>
+          <li>Эксплуатируемая кровля с видом на город</li>
+          <li>Продуманная инфраструктура для семей</li>
+          <li>Федеральный застройщик с опытом в нескольких регионах</li>
+        </ul>
+        <div class="formats-block">
+          <h4>Необычные форматы квартир</h4>
+          <p>Иногда хочется большего, чем просто практичная планировка. Кофе на террасе, когда город ещё только просыпается. Вечер в собственной бане. Гардеробная, где всё на своих местах. Или мансарда с пледом и особой атмосферой.</p>
+          <div class="formats-tags">
+            <span class="format-tag">Терраса</span>
+            <span class="format-tag">Баня</span>
+            <span class="format-tag">Гардеробная</span>
+            <span class="format-tag">Мансарда</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark">
+  <div class="container">
+    <p class="section-tag">Города</p>
+    <h2 class="section-title">Работаю в четырёх городах</h2>
+    <p class="section-sub">Один федеральный застройщик — единые стандарты качества в каждом городе.</p>
+    <div class="cities-grid">
+      <div class="city-card main">
+        <span class="city-status status-active">Продаётся</span>
+        <h3>Калининград</h3>
+        <p>Основной объект. Квартиры в наличии. Лучший ЖК России по версии ТОП ЖК 2026.</p>
+      </div>
+      <div class="city-card">
+        <span class="city-status status-club">Клубный дом</span>
+        <h3>Светлогорск</h3>
+        <p>Клубный дом у Балтийского моря. Ограниченное количество квартир — камерный формат для тех, кто ценит приватность.</p>
+      </div>
+      <div class="city-card">
+        <span class="city-status status-building">Бронирование открыто</span>
+        <h3>Ярославль</h3>
+        <p>Квартал строится. Тот же федеральный застройщик, те же стандарты. Бронирование уже открыто.</p>
+      </div>
+      <div class="city-card">
+        <span class="city-status status-soon">Скоро</span>
+        <h3>Рыбинск</h3>
+        <p>Старт продаж в ближайшее время. Напишите — сообщу первой, когда откроются.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-light">
+  <div class="container">
+    <p class="section-tag">Планировки</p>
+    <h2 class="section-title">Выберите планировку</h2>
+    <p class="section-sub">Актуальные цены и наличие — уточняйте в Telegram. Отвечаю быстро.</p>
+    <div class="layouts-grid">
+      <div class="layout-card"><div class="layout-img"><img src="images/plan-1.jpg" alt="Студия" onerror="this.parentNode.innerHTML='images/plan-1.jpg'" /></div><div class="layout-info"><div class="layout-type">Студия</div><div class="layout-area">от 28 м²</div><a href="https://t.me/usova.uv" target="_blank" class="layout-btn">Узнать цену →</a></div></div>
+      <div class="layout-card"><div class="layout-img"><img src="images/plan-2.jpg" alt="1-комнатная" onerror="this.parentNode.innerHTML='images/plan-2.jpg'" /></div><div class="layout-info"><div class="layout-type">1-комнатная</div><div class="layout-area">от 38 м²</div><a href="https://t.me/usova.uv" target="_blank" class="layout-btn">Узнать цену →</a></div></div>
+      <div class="layout-card"><div class="layout-img"><img src="images/plan-3.jpg" alt="1-комнатная" onerror="this.parentNode.innerHTML='images/plan-3.jpg'" /></div><div class="layout-info"><div class="layout-type">1-комнатная</div><div class="layout-area">от 44 м²</div><a href="https://t.me/usova.uv" target="_blank" class="layout-btn">Узнать цену →</a></div></div>
+      <div class="layout-card"><div class="layout-img"><img src="images/plan-4.jpg" alt="2-комнатная" onerror="this.parentNode.innerHTML='images/plan-4.jpg'" /></div><div class="layout-info"><div class="layout-type">2-комнатная</div><div class="layout-area">от 56 м²</div><a href="https://t.me/usova.uv" target="_blank" class="layout-btn">Узнать цену →</a></div></div>
+      <div class="layout-card"><div class="layout-img"><img src="images/plan-5.jpg" alt="2-комнатная" onerror="this.parentNode.innerHTML='images/plan-5.jpg'" /></div><div class="layout-info"><div class="layout-type">2-комнатная</div><div class="layout-area">от 62 м²</div><a href="https://t.me/usova.uv" target="_blank" class="layout-btn">Узнать цену →</a></div></div>
+      <div class="layout-card"><div class="layout-img"><img src="images/plan-6.jpg" alt="3-комнатная" onerror="this.parentNode.innerHTML='images/plan-6.jpg'" /></div><div class="layout-info"><div class="layout-type">3-комнатная</div><div class="layout-area">от 78 м²</div><a href="https://t.me/usova.uv" target="_blank" class="layout-btn">Узнать цену →</a></div></div>
+      <div class="layout-card"><div class="layout-img"><img src="images/plan-7.jpg" alt="3-комнатная" onerror="this.parentNode.innerHTML='images/plan-7.jpg'" /></div><div class="layout-info"><div class="layout-type">3-комнатная</div><div class="layout-area">от 86 м²</div><a href="https://t.me/usova.uv" target="_blank" class="layout-btn">Узнать цену →</a></div></div>
+      <div class="layout-card"><div class="layout-img"><img src="images/plan-8.jpg" alt="С террасой" onerror="this.parentNode.innerHTML='images/plan-8.jpg'" /></div><div class="layout-info"><div class="layout-type">С террасой</div><div class="layout-area">от 70 м²</div><a href="https://t.me/usova.uv" target="_blank" class="layout-btn">Узнать цену →</a></div></div>
+      <div class="layout-card"><div class="layout-img"><img src="images/plan-9.jpg" alt="С гардеробной" onerror="this.parentNode.innerHTML='images/plan-9.jpg'" /></div><div class="layout-info"><div class="layout-type">С гардеробной</div><div class="layout-area">от 65 м²</div><a href="https://t.me/usova.uv" target="_blank" class="layout-btn">Узнать цену →</a></div></div>
+      <div class="layout-card"><div class="layout-img"><img src="images/plan-10.jpg" alt="Мансарда" onerror="this.parentNode.innerHTML='images/plan-10.jpg'" /></div><div class="layout-info"><div class="layout-type">Мансарда</div><div class="layout-area">от 90 м²</div><a href="https://t.me/usova.uv" target="_blank" class="layout-btn">Узнать цену →</a></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark">
+  <div class="container">
+    <p class="section-tag">Видео</p>
+    <h2 class="section-title">Посмотрите комплекс вживую</h2>
+    <p class="section-sub">Двор, кровля, инфраструктура — видео от агентства недвижимости Вертикаль.</p>
+    <div class="video-wrap">
+      <iframe src="https://vk.com/video_ext.php?oid=474487652&id=456239038&hd=2&autoplay=0" allowfullscreen allow="autoplay; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="section section-dark" style="padding-top:0;">
+  <div class="container">
+    <div class="mortgage-grid">
+      <div>
+        <p class="section-tag">Ипотека</p>
+        <h2 class="section-title">Доступна всем — без льготных программ</h2>
+        <div class="mortgage-badge">
+          <strong>За первую неделю — почти 100 заявок</strong>
+          <p>Программа работает прямо сейчас. Процент одобрения — 99%.</p>
+        </div>
+        <ul class="conditions-list">
+          <li><span class="cond-label">Взнос</span> от 26%</li>
+          <li><span class="cond-label">Срок</span> до 30 лет</li>
+          <li><span class="cond-label">Одобрение</span> 99% (справка по форме банка)</li>
+          <li><span class="cond-label">Удорожание</span> всего 7% от суммы кредита</li>
+          <li><span class="cond-label">Подарок</span> кладовка в подарок</li>
+          <li><span class="cond-label">Рефинансирование</span> доступно в стандартном порядке</li>
+        </ul>
+      </div>
+      <div>
+        <p class="section-tag">Банки-партнёры</p>
+        <h2 class="section-title">9 банков — выберем лучшее для вас</h2>
+        <p style="color:rgba(255,255,255,0.6);margin-bottom:28px;font-size:15px;">Нажмите на нужный банк — напишите мне в Telegram, и я подберу лучшие условия именно по нему.</p>
+        <div class="banks-title">Выберите банк и напишите мне</div>
+        <div class="banks-grid">
+          <a href="https://t.me/usova.uv" target="_blank" class="bank-tag">Сбербанк</a>
+          <a href="https://t.me/usova.uv" target="_blank" class="bank-tag">ВТБ</a>
+          <a href="https://t.me/usova.uv" target="_blank" class="bank-tag">Совкомбанк</a>
+          <a href="https://t.me/usova.uv" target="_blank" class="bank-tag">ПСБ</a>
+          <a href="https://t.me/usova.uv" target="_blank" class="bank-tag">Т-Банк</a>
+          <a href="https://t.me/usova.uv" target="_blank" class="bank-tag">Альфа-Банк</a>
+          <a href="https://t.me/usova.uv" target="_blank" class="bank-tag">АТБ</a>
+          <a href="https://t.me/usova.uv" target="_blank" class="bank-tag">Металлинвестбанк</a>
+          <a href="https://t.me/usova.uv" target="_blank" class="bank-tag">Газпромбанк</a>
+          <a href="https://t.me/usova.uv" target="_blank" class="bank-tag">Ак Барс Банк</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="section-tag">Почему через Вертикаль</p>
+    <h2 class="section-title">Три причины работать с агентом</h2>
+    <div class="why-grid">
+      <div class="why-card"><div class="why-num">01</div><h3>Вы не платите ничего</h3><p>Моя комиссия — это забота застройщика, не ваша. Цена квартиры такая же, как при покупке напрямую. Но со мной вы получаете полное сопровождение.</p></div>
+      <div class="why-card"><div class="why-num">02</div><h3>Всё дистанционно</h3><p>Большинство клиентов купили квартиру, ни разу не приехав в город до получения ключей. Выбор, ипотека, документы, регистрация — всё онлайн.</p></div>
+      <div class="why-card"><div class="why-num">03</div><h3>Команда за каждым шагом</h3><p>Я не работаю в одиночку. Каждый этап сделки закрывает профессионал своего направления. Вы не останетесь один на один с банком или документами.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-light">
+  <div class="container">
+    <div class="about-me-grid">
+      <div class="about-me-photo">
+        <img src="images/julia.jpg" alt="Юлия Усова" onerror="this.style.display='none';this.parentNode.innerHTML='<div class=about-me-photo-placeholder>Загрузите фото<br>images/julia.jpg</div>'" />
+      </div>
+      <div>
+        <p class="section-tag">Об агенте</p>
+        <h2 class="about-me-name">Юлия Усова</h2>
+        <p class="about-me-title">Генеральный директор</p>
+        <p class="about-me-subtitle">Агентство недвижимости Вертикаль · в профессии с 2006 года</p>
+        <p class="about-me-text">За это время я помогла сотням семей найти и оформить квартиру — в Москве и Подмосковье, Калининграде и области, Ярославле и Рыбинске. Работаю дистанционно: большинство клиентов впервые приехали в свой новый город уже с ключами в руках.</p>
+        <p class="about-me-text">Много лет я делаю счастливыми семьи в разных городах России — при поддержке своей команды.</p>
+        <div class="about-me-stats">
+          <div class="about-stat"><strong>19+</strong><span>лет в профессии</span></div>
+          <div class="about-stat"><strong>4</strong><span>города</span></div>
+          <div class="about-stat"><strong>9</strong><span>банков-партнёров</span></div>
+        </div>
+        <p class="profiles-title">Мои профили</p>
+        <div class="profiles-list">
+          <a href="https://www.cian.ru/agents/21633/" target="_blank" class="profile-link">ЦИАН</a>
+          <a href="https://www.avito.ru/brands/i210806733" target="_blank" class="profile-link">Авито</a>
+          <a href="https://agencies.domclick.ru/agent/8810670" target="_blank" class="profile-link">ДомКлик</a>
+          <a href="https://vk.com/agentusova" target="_blank" class="profile-link">ВКонтакте</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <p class="section-tag">Отзывы</p>
+    <h2 class="section-title">Меня уже знают в разных городах</h2>
+    <p class="section-sub">Реальные покупатели из разных городов России.</p>
+    <div class="reviews-grid">
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">Купили квартиру в Калининграде, живём в Москве. Юлия сопроводила весь процесс дистанционно — от выбора планировки до получения документов. Ни разу не пожалели.</p><div class="review-author"><div class="review-avatar">АМ</div><div><div class="review-name">Александр М.</div><div class="review-city">Москва</div></div></div></div>
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">Думали, сложно купить квартиру в другом городе без поездок. Юлия объяснила каждый шаг, помогла с ипотекой — одобрили с первого раза.</p><div class="review-author"><div class="review-avatar">ЕС</div><div><div class="review-name">Елена С.</div><div class="review-city">Санкт-Петербург</div></div></div></div>
+      <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text">Искали инвестиционную квартиру в Калининграде. Юлия показала несколько вариантов, объяснила плюсы каждого. Остановились на 2-комнатной — очень довольны.</p><div class="review-author"><div class="review-avatar">ДК</div><div><div class="review-name">Дмитрий К.</div><div class="review-city">Екатеринбург</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="cta-block">
+      <h2>Хотите узнать цену и наличие квартир?</h2>
+      <p>Напишите — отвечу в течение нескольких минут. Расскажу про актуальные варианты, помогу с ипотекой и проведу через всю сделку. Бесплатно для покупателя.</p>
+      <div class="cta-actions">
+        <a href="https://t.me/usova.uv" target="_blank" class="btn-primary">Написать в Telegram</a>
+        <a href="https://vk.com/agentusova" target="_blank" class="btn-secondary">ВКонтакте</a>
+      </div>
+      <a href="tel:+79154977771" class="cta-phone">+7 915 497-77-71</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo">Вертикаль</div>
+        <p style="line-height:1.7;">Агентство недвижимости<br>Генеральный директор — Юлия Усова</p>
+        <p style="margin-top:10px;">Калининград · Светлогорск · Ярославль · Рыбинск · Москва</p>
+      </div>
+      <div>
+        <div class="footer-col-title">Контакты</div>
+        <div class="footer-links">
+          <a href="tel:+79154977771" class="footer-phone-big">+7 915 497-77-71</a>
+          <a href="https://t.me/usova.uv" target="_blank">Telegram: @usova.uv</a>
+          <a href="https://vk.com/agentusova" target="_blank">ВКонтакте</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Адрес и профили</div>
+        <div class="footer-links">
+          <span>г. Москва, Протопоповский пер., д. 17 стр. 5</span>
+          <a href="https://www.cian.ru/agents/21633/" target="_blank">ЦИАН</a>
+          <a href="https://www.avito.ru/brands/i210806733" target="_blank">Авито</a>
+          <a href="https://agencies.domclick.ru/agent/8810670" target="_blank">ДомКлик</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <span>© 2026 Агентство недвижимости Вертикаль. Все права защищены.</span>
+      <a href="privacy.html" style="color:rgba(255,255,255,0.3);transition:color 0.2s;" onmouseover="this.style.color='#c9a84c'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<!-- COOKIE BANNER -->
+<div class="cookie-banner" id="cookieBanner">
+  <p class="cookie-text">
+    Мы используем файлы cookie для улучшения работы сайта и анализа посещаемости. Продолжая использовать сайт, вы соглашаетесь с нашей <a href="privacy.html" target="_blank">Политикой конфиденциальности</a>.
+  </p>
+  <div class="cookie-actions">
+    <button class="cookie-decline" onclick="cookieDecline()">Только необходимые</button>
+    <button class="cookie-accept" onclick="cookieAccept()">Принять все</button>
+  </div>
+</div>
+
+<script>
+  // Cookie banner
+  function cookieAccept() {
+    localStorage.setItem('cookie_consent', 'accepted');
+    document.getElementById('cookieBanner').style.display = 'none';
+  }
+  function cookieDecline() {
+    localStorage.setItem('cookie_consent', 'declined');
+    document.getElementById('cookieBanner').style.display = 'none';
+  }
+  if (localStorage.getItem('cookie_consent')) {
+    document.getElementById('cookieBanner').style.display = 'none';
+  }
+
+  var cur = 0, tot = 6;
+  var track = document.getElementById('sliderTrack');
+  var dotsEl = document.getElementById('sliderDots');
+  for (var i = 0; i < tot; i++) {
+    var d = document.createElement('button');
+    d.className = 'dot' + (i === 0 ? ' active' : '');
+    d.setAttribute('data-i', i);
+    d.onclick = (function(n){ return function(){ goTo(n); }; })(i);
+    dotsEl.appendChild(d);
+  }
+  function goTo(n) {
+    cur = (n + tot) % tot;
+    track.style.transform = 'translateX(-' + cur * 100 + '%)';
+    document.querySelectorAll('.dot').forEach(function(d, idx){ d.classList.toggle('active', idx === cur); });
+  }
+  function slideMove(dir) { goTo(cur + dir); }
+  setInterval(function(){ slideMove(1); }, 5000);
+</script>
+
+</body>
+</html>
