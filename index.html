@@ -101,7 +101,12 @@
     .layout-card { background: var(--white); border: 1px solid #e8e4da; border-radius: var(--radius-lg); overflow: hidden; transition: box-shadow 0.2s, transform 0.2s; }
     .layout-card:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.1); transform: translateY(-4px); }
     .layout-img { background: var(--gray-light); aspect-ratio: 4/3; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--gray); overflow: hidden; text-align: center; padding: 12px; }
-    .layout-img img { width: 100%; height: 100%; object-fit: contain; padding: 16px; }
+    .layout-img img { width: 100%; height: 100%; object-fit: contain; padding: 16px; cursor: zoom-in; }
+    .lightbox { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.92); align-items: center; justify-content: center; padding: 20px; }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: var(--radius); }
+    .lightbox-close { position: fixed; top: 20px; right: 24px; color: var(--white); font-size: 36px; cursor: pointer; line-height: 1; opacity: 0.8; transition: opacity 0.2s; }
+    .lightbox-close:hover { opacity: 1; }
     .layout-info { padding: 20px; }
     .layout-type { font-size: 18px; font-weight: 600; color: var(--dark); margin-bottom: 4px; }
     .layout-area { font-size: 14px; color: var(--gray); margin-bottom: 16px; }
@@ -497,6 +502,12 @@
   </div>
 </footer>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close" onclick="closeLightbox()">×</span>
+  <img id="lightboxImg" src="" alt="" onclick="event.stopPropagation()" />
+</div>
+
 <!-- COOKIE BANNER -->
 <div class="cookie-banner" id="cookieBanner">
   <p class="cookie-text">
@@ -522,8 +533,21 @@
     document.getElementById('cookieBanner').style.display = 'none';
   }
 
-  var cur = 0, tot = 6;
-  var track = document.getElementById('sliderTrack');
+  function openLightbox(src) {
+    document.getElementById('lightboxImg').src = src;
+    document.getElementById('lightbox').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeLightbox(); });
+  document.querySelectorAll('.layout-img img').forEach(function(img){
+    img.addEventListener('click', function(){ openLightbox(this.src); });
+  });
+
+  var cur = 0, tot = 6;  var track = document.getElementById('sliderTrack');
   var dotsEl = document.getElementById('sliderDots');
   for (var i = 0; i < tot; i++) {
     var d = document.createElement('button');
